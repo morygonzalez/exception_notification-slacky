@@ -6,7 +6,7 @@ module ExceptionNotifier
       begin
         webhook_url = options.fetch(:webhook_url)
         @message_opts = options.fetch(:additional_parameters, {})
-        @notifier = Slack::Notifier.new webhook_url, options
+        @notifier = Slack::Notifier.new(webhook_url, options)
       rescue
         @notifier = nil
       end
@@ -14,11 +14,18 @@ module ExceptionNotifier
 
     def call(exception, options={})
       env         = options[:env] || {}
-      @request    = ActionDispatch::Request.new(env)
+      @request    ||= if defined?(ActionDispatch::Request)
+                        ActionDispatch::Request.new(env)
+                      else
+                        require 'rack/request'
+                        Rack::Request.new(env)
+                      end
       message     = 'Exception Occured!'
       attachments = build_attachemnt(exception, options)
       @message_opts.merge!(attachments: [attachments])
       @notifier.ping(message, @message_opts) if valid?
+    rescue LoadError, NameError
+      raise "Please use this notifier in some kind of Rack-based webapp"
     end
 
     protected
@@ -31,7 +38,7 @@ module ExceptionNotifier
       {
         fallback: "#{exception.class} #{exception.message}",
         color: "danger",
-        title: "[#{Rails.env.upcase}][ERROR] #{exception.class}",
+        title: "[ERROR] #{exception.class}",
         fields: [
           {
             title: "Host",
@@ -40,7 +47,7 @@ module ExceptionNotifier
           },
           {
             title: "Request path",
-            value: @request.fullpath,
+            value: @request.path_info,
             short: true
           },
           {
@@ -50,7 +57,7 @@ module ExceptionNotifier
           },
           {
             title: "IP Address",
-            value: @request.remote_ip,
+            value: @request.ip,
             short: true
           },
           {
