@@ -1,11 +1,11 @@
 # coding: utf-8
 lib = File.expand_path('../lib', __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require 'exception_notification/rich_slack/version'
+require 'exception_notification/slacky/version'
 
 Gem::Specification.new do |spec|
-  spec.name          = "exception_notification-rich_slack"
-  spec.version       = ExceptionNotification::RichSlack::VERSION
+  spec.name          = "exception_notification-slacky"
+  spec.version       = ExceptionNotification::Slacky::VERSION
   spec.authors       = ["森井ゴンザレス"]
   spec.email         = ["morygonzalez@gmail.com"]
 

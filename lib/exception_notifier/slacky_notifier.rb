@@ -1,5 +1,5 @@
 module ExceptionNotifier
-  class RichSlackNotifier
+  class SlackyNotifier
     attr_reader :notifier
 
     def initialize(options)
