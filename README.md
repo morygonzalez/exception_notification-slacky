@@ -1,8 +1,10 @@
 # ExceptionNotification::Slacky
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/exception_notification/slacky`. To experiment with that code, run `bin/console` for an interactive prompt.
+[![wercker status](https://app.wercker.com/status/f4a6b632836b07c473e73edeeaa54808/m "wercker status")](https://app.wercker.com/project/bykey/f4a6b632836b07c473e73edeeaa54808)
 
-TODO: Delete this and the text above, and describe your gem
+Rich informed exception_notifier for slack.
+
+![2015-04-09 21 26 41](https://cloud.githubusercontent.com/assets/106567/7066600/36176e0c-deff-11e4-9bac-72b4e5ba15c7.png)
 
 ## Installation
 
@@ -22,7 +24,22 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+Work as custom notifier for exception_notification.
+
+### Example usage with Rails
+
+add below lines to config/initializers/exception_notification.rb.
+
+```ruby
+  config.add_notifier :slacky, {
+    webhook_url: 'your slack incoming webhook url',
+    channel: 'channel you want to being notified to',
+    username: 'slacky',
+    addtional_parameters: {
+      icon_emoji: ':warning:'
+    }
+  }
+```
 
 ## Development
 
@@ -32,7 +49,7 @@ To install this gem onto your local machine, run `bundle exec rake install`. To 
 
 ## Contributing
 
-1. Fork it ( https://github.com/[my-github-username]/exception_notification-slacky/fork )
+1. Fork it ( https://github.com/morygonzalez/exception_notification-slacky/fork )
 2. Create your feature branch (`git checkout -b my-new-feature`)
 3. Commit your changes (`git commit -am 'Add some feature'`)
 4. Push to the branch (`git push origin my-new-feature`)
