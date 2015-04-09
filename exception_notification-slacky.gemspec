@@ -10,7 +10,7 @@ Gem::Specification.new do |spec|
   spec.email         = ["morygonzalez@gmail.com"]
 
   spec.summary       = %q{Send Exception notification to slack}
-  spec.description   = %q{Send Exception notification to slack}
+  spec.description   = %q{Send Exception notification to slack. Works as ExceptionNotification Plugin.}
   spec.homepage      = "https://github.com/morygonzalez/exception_notification-slacky"
 
   spec.files         = `git ls-files -z`.split("\x0").reject { |f| f.match(%r{^(test|spec|features)/}) }
@@ -25,9 +25,9 @@ Gem::Specification.new do |spec|
   spec.add_runtime_dependency 'exception_notification', '~> 4.0'
   spec.add_runtime_dependency 'slack-notifier', '~> 1.1'
 
-  spec.add_development_dependency 'bundler'
-  spec.add_development_dependency 'rake'
-  spec.add_development_dependency 'rack'
+  spec.add_development_dependency 'bundler', '~> 1.3'
+  spec.add_development_dependency 'rake', '~> 10.0'
+  spec.add_development_dependency 'rack', '~> 1.6'
   spec.add_development_dependency 'rspec', '~> 3.0'
-  spec.add_development_dependency 'webmock'
+  spec.add_development_dependency 'webmock', '~> 1.21'
 end
