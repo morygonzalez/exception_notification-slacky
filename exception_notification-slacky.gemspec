@@ -6,6 +6,7 @@ require 'exception_notification/slacky/version'
 Gem::Specification.new do |spec|
   spec.name          = "exception_notification-slacky"
   spec.version       = ExceptionNotification::Slacky::VERSION
+  spec.licenses      = ['MIT']
   spec.authors       = ["森井ゴンザレス"]
   spec.email         = ["morygonzalez@gmail.com"]
 
