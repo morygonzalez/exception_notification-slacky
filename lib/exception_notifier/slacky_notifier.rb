@@ -15,7 +15,7 @@ module ExceptionNotifier
     def call(exception, options={})
       env         = options[:env] || {}
       @request    = ActionDispatch::Request.new(env)
-      message     = 'エラーが起こりました、至急確認してください！、！！！'
+      message     = 'Exception Occured!'
       attachments = build_attachemnt(exception, options)
       @message_opts.merge!(attachments: [attachments])
       @notifier.ping(message, @message_opts) if valid?
