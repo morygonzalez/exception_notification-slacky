@@ -5,6 +5,7 @@ module ExceptionNotifier
     def initialize(options)
       begin
         webhook_url = options.fetch(:webhook_url)
+        @color = options.fetch(:color, :danger)
         @message_opts = options.fetch(:additional_parameters, {})
         @notifier = Slack::Notifier.new(webhook_url, options)
       rescue
@@ -37,7 +38,7 @@ module ExceptionNotifier
     def build_attachemnt(exception, options = {})
       {
         fallback: "#{exception.class} #{exception.message}",
-        color: "danger",
+        color: @color.to_s,
         title: "[ERROR] #{exception.class}",
         fields: [
           {
