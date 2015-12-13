@@ -36,7 +36,7 @@ add below lines to config/initializers/exception_notification.rb.
     channel: 'channel you want to being notified to',
     username: 'slacky',
     color: :danger, # optional, default to :danger
-    addtional_parameters: {
+    additional_parameters: {
       icon_emoji: ':warning:'
     }
   }
