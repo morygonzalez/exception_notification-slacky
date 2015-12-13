@@ -7,8 +7,8 @@ Gem::Specification.new do |spec|
   spec.name          = "exception_notification-slacky"
   spec.version       = ExceptionNotification::Slacky::VERSION
   spec.licenses      = ['MIT']
-  spec.authors       = ["森井ゴンザレス"]
-  spec.email         = ["morygonzalez@gmail.com"]
+  spec.authors       = ["森井ゴンザレス", "Ryutaro Mizokami"]
+  spec.email         = ["morygonzalez@gmail.com", "r.mizokami@gmail.com"]
 
   spec.summary       = %q{Send Exception notification to slack}
   spec.description   = %q{Send Exception notification to slack. Works as ExceptionNotification Plugin.}
