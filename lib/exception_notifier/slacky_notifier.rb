@@ -7,6 +7,7 @@ module ExceptionNotifier
         webhook_url = options.fetch(:webhook_url)
         @color = options.fetch(:color, :danger)
         @message_opts = options.fetch(:additional_parameters, {})
+        @custom_fields = options.fetch(:custom_fields, [])
         @notifier = Slack::Notifier.new(webhook_url, options)
       rescue
         @notifier = nil
@@ -40,39 +41,56 @@ module ExceptionNotifier
         fallback: "#{exception.class} #{exception.message}",
         color: @color.to_s,
         title: "[ERROR] #{exception.class}",
-        fields: [
-          {
-            title: "Host",
-            value: (Socket.gethostname rescue nil),
-            short: true
-          },
-          {
-            title: "Request path",
-            value: @request.path_info,
-            short: true
-          },
-          {
-            title: "HTTP Method",
-            value: @request.request_method,
-            short: true
-          },
-          {
-            title: "IP Address",
-            value: @request.ip,
-            short: true
-          },
-          {
-            title: "Occurred on",
-            value: (exception.backtrace.first rescue nil),
-            short: false
-          },
-          {
-            title: "Error message",
-            value: exception.message,
-            short: false
-          }
-        ]
+        fields: build_fields(exception)
       }
+    end
+
+    def build_fields(exception)
+      fields = [
+        {
+          title: "Host",
+          value: (Socket.gethostname rescue nil),
+          short: true
+        },
+        {
+          title: "Request path",
+          value: @request.path_info,
+          short: true
+        },
+        {
+          title: "HTTP Method",
+          value: @request.request_method,
+          short: true
+        },
+        {
+          title: "IP Address",
+          value: @request.ip,
+          short: true
+        },
+        {
+          title: "Occurred on",
+          value: (exception.backtrace.first rescue nil),
+          short: false
+        },
+        {
+          title: "Error message",
+          value: exception.message,
+          short: false
+        }
+      ]
+
+      @custom_fields.each do |custom_field|
+        field = {
+          title: custom_field[:title],
+          value: custom_field[:value].call(@request),
+          short: custom_field[:short]
+        }
+        i = fields.index {|f| f[:title] == custom_field[:after]}
+        i = i ? i.succ : -1
+        fields.insert(i, field)
+      end
+
+      fields
     end
   end
 end

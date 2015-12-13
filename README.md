@@ -38,7 +38,15 @@ add below lines to config/initializers/exception_notification.rb.
     color: :danger, # optional, default to :danger
     additional_parameters: {
       icon_emoji: ':warning:'
-    }
+    },
+    custom_fields: [
+      {
+        title: 'User Agent',
+        value: ->(req) { req.user_agent },
+        short: false,
+        after: 'IP Address'
+      }
+    ]
   }
 ```
 
