@@ -93,5 +93,40 @@ describe ExceptionNotification::Slacky do
       it { expect(slack_notifier.notifier.username).to eq('slacky') }
       it { expect(slack_notifier.notifier.default_payload[:additional_parameters][:icon_emoji]).to eq(':warning:') }
     end
+
+    context 'when manually' do
+      let(:rack_options) do
+        {
+          env: {}
+        }
+      end
+
+
+      describe 'Notification format' do
+        before do
+          fields = fake_notification.last[:attachments][0][:fields]
+          fields[1][:value] = ""  # Request Path
+          fields[2][:value] = nil # HTTP Method
+          fields[3][:value] = nil # IP Address
+          fields[4][:value] = nil # User Agent
+        end
+
+        it {
+          allow_any_instance_of(Slack::Notifier).to receive(:ping).with(*fake_notification)
+          slack_notifier.call(exception, rack_options)
+        }
+      end
+
+      describe 'Options' do
+        before do
+          stub_request(:any, options[:webhook_url])
+          slack_notifier.call(exception, rack_options)
+        end
+
+        it { expect(slack_notifier.notifier.channel).to eq('#general') }
+        it { expect(slack_notifier.notifier.username).to eq('slacky') }
+        it { expect(slack_notifier.notifier.default_payload[:additional_parameters][:icon_emoji]).to eq(':warning:') }
+      end
+    end
   end
 end
