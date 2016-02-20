@@ -59,7 +59,7 @@ module ExceptionNotifier
         },
         {
           title: "HTTP Method",
-          value: @request.request_method,
+          value: (@request.request_method rescue nil),
           short: true
         },
         {
