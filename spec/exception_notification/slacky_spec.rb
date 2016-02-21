@@ -101,7 +101,6 @@ describe ExceptionNotification::Slacky do
         }
       end
 
-
       describe 'Notification format' do
         before do
           fields = fake_notification.last[:attachments][0][:fields]
