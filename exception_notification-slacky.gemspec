@@ -11,7 +11,9 @@ Gem::Specification.new do |spec|
   spec.email         = ["morygonzalez@gmail.com", "r.mizokami@gmail.com"]
 
   spec.summary       = %q{Send Exception notification to slack}
-  spec.description   = %q{Send Exception notification to slack. Works as ExceptionNotification Plugin.}
+  spec.description   = %q{Send Exception notification to slack. Works as ExceptionNotification Plugin.
+
+ExceptionNotification have supported slack's attachment (https://github.com/smartinez87/exception_notification/commit/132be9ef17413ecb05a6d0cf0c42460debb627f9). So this gem is not necessary to notify rich error information to slack. Please use exception_notification's feature. }
   spec.homepage      = "https://github.com/morygonzalez/exception_notification-slacky"
 
   spec.files         = `git ls-files -z`.split("\x0").reject { |f| f.match(%r{^(test|spec|features)/}) }

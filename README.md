@@ -6,6 +6,12 @@ Rich informed exception_notifier for slack.
 
 ![2015-04-09 21 26 41](https://cloud.githubusercontent.com/assets/106567/7066600/36176e0c-deff-11e4-9bac-72b4e5ba15c7.png)
 
+## DEPRECATION WARNING
+
+[exception_notification](https://github.com/smartinez87/exception_notification) have supported slack's attachment ([Change format to slack notifications · smartinez87/exception_notification@132be9e](https://github.com/smartinez87/exception_notification/commit/132be9ef17413ecb05a6d0cf0c42460debb627f9)).
+
+So this gem is not necessary to notify rich error information to slack. Please use exception_notification's feature.
+
 ## Installation
 
 Add this line to your application's Gemfile:
