@@ -1,6 +1,6 @@
 # ExceptionNotification::Slacky
 
-[![wercker status](https://app.wercker.com/status/f4a6b632836b07c473e73edeeaa54808/m "wercker status")](https://app.wercker.com/project/bykey/f4a6b632836b07c473e73edeeaa54808)
+[![wercker status](https://app.wercker.com/status/f4a6b632836b07c473e73edeeaa54808/s/master "wercker status")](https://app.wercker.com/project/byKey/f4a6b632836b07c473e73edeeaa54808)
 
 Rich informed exception_notifier for slack.
 
